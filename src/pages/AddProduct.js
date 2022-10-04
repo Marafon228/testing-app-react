@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form';
 import {useRef} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {Image, InputGroup} from "react-bootstrap";
+
 
 function AddProduct(){
 
@@ -14,14 +16,32 @@ function AddProduct(){
 
     const navigate = useNavigate();
 
+
+    function uploadImage () {
+        (":file").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = imageIsLoaded;
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    }
+
+    function imageIsLoaded(e) {
+        ('#myImg').attr('src', e.target.result);
+        ('#yourImage').attr('src', e.target.result);
+    }
+
     function addProductHandler(){
         var payload = {
             Name: ProductName.current.value,
             Description: ProductDescription.current.value,
             Price: ProductPrice.current.value,
-            Image: ProductImage.current.value,
+            Image: ProductImage.current.valueOf(uploadImage()),
+
         }
-        axios.post("http://192.168.0.101:3310/api/Products/GetProducts",payload)//POST запрос
+        axios.post("http://192.168.100.123:3310/api/Products/GetProducts",payload)//POST запрос
             .then((response)=>{
                 navigate("/");
             })
@@ -50,7 +70,9 @@ function AddProduct(){
 
             <Form.Group className="mb-3" controlId="formProductImage">
                 <Form.Label>Image</Form.Label>
-                <Form.Control type="Image"  ref={ProductImage}/>
+                <Form.Control type="file"  ref={ProductImage} Form/>
+
+
 
             </Form.Group>
 
