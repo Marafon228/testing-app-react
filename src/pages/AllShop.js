@@ -2,11 +2,15 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {Card, Col, Row} from "react-bootstrap";
 import {encodeBase64} from "tweetnacl-util";
+import ImageUploading from 'react-images-uploading';
 
 
 
 
 function AllShop(){
+
+
+
 
     const [shop, setShop] = useState([])
 
@@ -38,6 +42,7 @@ function AllShop(){
                             <Card.Text>
                                 <b>Price:</b>{sp.Price}
                             </Card.Text>
+
                         </Card.Body>
                     </Card>
                 </Col>
