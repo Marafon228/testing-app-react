@@ -1,6 +1,8 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {Card, Col, Row} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -10,7 +12,7 @@ import {Card, Col, Row} from "react-bootstrap";
 function AllShop(){
 
 
-
+    const navigate = useNavigate();
 
     const [shop, setShop] = useState([])
 
@@ -18,7 +20,7 @@ function AllShop(){
 
     useEffect(()=>
     {
-        axios.get("http://192.168.0.101:3310/api/Products/GetProducts")
+        axios.get("http://192.168.100.123:3310/api/Products/GetProducts")
             .then((response)=>{
                 setShop((existingData)=>{
                         return response.data;
@@ -34,7 +36,9 @@ function AllShop(){
     return<>
         <Row>
             <Col md={{ span: 4, offset: 4}}>
-
+                <Button variant="primary" type="button" onClick={()=> {navigate("/add-product");}}>
+                    Add a product
+                </Button>
             </Col>
         </Row>
 

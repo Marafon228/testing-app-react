@@ -3,7 +3,8 @@ import Form from 'react-bootstrap/Form';
 import {useRef} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import {Image, InputGroup} from "react-bootstrap";
+/*import {Image, InputGroup} from "react-bootstrap";*/
+import {decodeBase64} from "tweetnacl-util";
 
 
 function AddProduct(){
@@ -17,7 +18,7 @@ function AddProduct(){
     const navigate = useNavigate();
 
 
-    function uploadImage () {
+    /*function uploadImage () {
         (":file").change(function () {
             if (this.files && this.files[0]) {
                 var reader = new FileReader();
@@ -26,28 +27,28 @@ function AddProduct(){
                 reader.readAsDataURL(this.files[0]);
             }
         });
-    }
+    }*/
 
-    function imageIsLoaded(e) {
+    /*function imageIsLoaded(e) {
         ('#myImg').attr('src', e.target.result);
         ('#yourImage').attr('src', e.target.result);
-    }
+    }*/
 
     function addProductHandler(){
         var payload = {
             Name: ProductName.current.value,
             Description: ProductDescription.current.value,
             Price: ProductPrice.current.value,
-            Image: ProductImage.current.valueOf(uploadImage()),
-
+            Image: decodeBase64(ProductImage.current.value)
         }
-        axios.post("http://192.168.100.123:3310/api/Products/GetProducts",payload)//POST запрос
+        axios.post("http://192.168.100.123:3310/api/Products/AddProductWeb",payload)//POST запрос
             .then((response)=>{
                 navigate("/");
-            })
+            });
     }
 
-    return<>
+    return (
+        <>
         <legend>Add a new product</legend>
         <Form>
             <Form.Group className="mb-3" controlId="formProductName">
@@ -77,11 +78,12 @@ function AddProduct(){
             </Form.Group>
 
 
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="button" onClick={addProductHandler}>
                 Submit
             </Button>
         </Form>
-    </>;
+    </>
+    );
 }
 
 
