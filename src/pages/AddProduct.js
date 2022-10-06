@@ -4,10 +4,16 @@ import {useRef} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 /*import {Image, InputGroup} from "react-bootstrap";*/
-import {decodeBase64} from "tweetnacl-util";
+/*import {encodeBase64} from "tweetnacl-util";*/
+/*import canvas, {Canvas} from "canvas"*/
+
+
+
 
 
 function AddProduct(){
+
+
 
     const ProductName = useRef("");
     const ProductDescription = useRef("");
@@ -35,12 +41,36 @@ function AddProduct(){
     }*/
 
     function addProductHandler(){
+
+        /*var base64String = "";
+        function Uploaded() {
+            var file = ProductImage.current.value;
+            var reader = new FileReader();
+            reader.onload = function () {
+                base64String = reader.result.replace("data:", "")
+                    .replace(/^.+,/, "");
+                imageBase64Stringsep = base64String;
+            }
+            reader.readAsDataURL(file);
+        }*/
+        /*function display() {
+            console.log("Base64String about to be printed");
+            alert(base64String);
+        }*/
+        /*const toDataUrl = Canvas.toDataURL(ProductImage.current)*/
         var payload = {
+
             Name: ProductName.current.value,
             Description: ProductDescription.current.value,
             Price: ProductPrice.current.value,
-            Image: decodeBase64(ProductImage.current.value)
+
+            /*Image: 'data:image/png;base64,${ProductImage.current.value}'*/
+            /*Image: decodeBase64(ProductImage.current).toString(),*/
+            /*Image: encodeBase64(ProductImage.current.value),*/
+            /*Image: createCanvas(),*/
+
         }
+        console.log(payload.Image);
         axios.post("http://192.168.100.123:3310/api/Products/AddProductWeb",payload)//POST запрос
             .then((response)=>{
                 navigate("/");
