@@ -3,11 +3,12 @@ import Form from 'react-bootstrap/Form';
 import {useRef} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+/*import {FormLabel} from "react-bootstrap";*/
+/*import {encodeBase64} from "tweetnacl-util";*/
+/*import {type} from "@testing-library/user-event/dist/type";*/
 /*import {Image, InputGroup} from "react-bootstrap";*/
 /*import {encodeBase64} from "tweetnacl-util";*/
 /*import canvas, {Canvas} from "canvas"*/
-
-
 
 
 
@@ -42,6 +43,8 @@ function AddProduct(){
 
     function addProductHandler(){
 
+        /*console.log(typeof document.getElementById('inputImage'))*/
+
         /*var base64String = "";
         function Uploaded() {
             var file = ProductImage.current.value;
@@ -58,11 +61,101 @@ function AddProduct(){
             alert(base64String);
         }*/
         /*const toDataUrl = Canvas.toDataURL(ProductImage.current)*/
+/*
+        var p;
+        var canvas = document.createElement("canvas");
+        var img1=document.createElement("img");
+
+        function getBase64Image(){
+            p=document.getElementById("fileUpload").value;
+            img1.setAttribute('src', p);
+            canvas.width = img1.width;
+            canvas.height = img1.height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img1, 0, 0);
+            var dataURL = canvas.toDataURL("image/png");
+            alert("from getbase64 function"+dataURL );
+            return dataURL;
+        }*/
+        /*var dtURL = {
+            getBase64Image
+        };
+        console.log(dtURL);*/
+
+        /*document.querySelector('#ProductImage').addEventListener('change', function() {
+
+            var reader = new FileReader();
+            reader.onload = function() {
+
+                var arrayBuffer = new Uint8Array(reader.result);
+                console.log(arrayBuffer);
+            };
+            reader.readAsArrayBuffer(this.files[0]);
+        });
+
+        var reader = new FileReader(ProductImage.current.value);
+        reader.onload = function () {
+            var arrayBuffer = new Uint8Array(reader.result);
+            console.log(arrayBuffer);
+        }
+
+*/
+
+        /*imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
+        }*/
+
+
+        /*const input = ProductImage
+        input.type = "file";
+        document.body.append(input);
+        input.addEventListener("change", async event => {
+            const ab = await input.files[0].arrayBuffer();
+            const ui8a = new Uint8Array(ab);
+            console.log("Uint8Array", ui8a);
+        });*/
+
+        /*var imgArray = async ()=> {
+            const ab = await ProductImage.current.arrayBuffer();
+            const ui8a = new Uint8Array(ab);
+            console.log("Uint8Array", ui8a);
+            return ui8a;
+        }*/
+
+        /*const reader = new FileReader();
+        reader.readAsDataURL()
+        reader.onload = function() {
+
+            var arrayBuffer = new Uint8Array(reader.result);
+            console.log(arrayBuffer);
+        };
+        reader.readAsArrayBuffer(this.files[0]);*/
+
+        /*var file = this.refs.fileUpload.getInputDOMNode().files;*/
+
         var payload = {
+
 
             Name: ProductName.current.value,
             Description: ProductDescription.current.value,
             Price: ProductPrice.current.value,
+            /*Image: new ArrayBuffer(ProductImage)*/
+
+                /*async ()=> {
+                const ab = await ProductImage.current.arrayBuffer();
+                const ui8a = new Uint8Array(ab);
+                console.log("Uint8Array", ui8a);
+                return ui8a;
+            }*/
+
+
+            /*Image: ProductImage.current*/
+
+
+            /*Image: dtURL*/
 
             /*Image: 'data:image/png;base64,${ProductImage.current.value}'*/
             /*Image: decodeBase64(ProductImage.current).toString(),*/
@@ -70,12 +163,49 @@ function AddProduct(){
             /*Image: createCanvas(),*/
 
         }
+        console.log(ProductImage);
+        console.log(imgArray);
+        console.log(typeof payload.Image);
         console.log(payload.Image);
-        axios.post("http://192.168.100.123:3310/api/Products/AddProductWeb",payload)//POST запрос
+        axios.post("http://192.168.10.244:3310/api/Products/AddProductWeb",payload)//POST запрос
             .then((response)=>{
                 navigate("/");
             });
+        imgArray = new FileReader()
+        imgArray.onload = function() {
+
+            var arrayBuffer = new Uint8Array(imgArray.result);
+            console.log(arrayBuffer);
+        };
+        imgArray.readAsArrayBuffer(this.files[0]);
+
+
+
+        /*
+        *  var reader = new FileReader();
+            reader.onload = function() {
+
+                var arrayBuffer = new Uint8Array(reader.result);
+                console.log(arrayBuffer);
+            };
+            reader.readAsArrayBuffer(this.files[0]);
+        *
+        * */
+
+
     }
+    /*function MyComponent(): JSX.Element {
+        const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
+            const files = Array.from(e.target.files)
+            console.log("files:", files)
+        }
+    }*/
+
+    var setImgArray;
+    var imgArray;
+
+
+
 
     return (
         <>
@@ -101,16 +231,25 @@ function AddProduct(){
 
             <Form.Group className="mb-3" controlId="formProductImage">
                 <Form.Label>Image</Form.Label>
-                <Form.Control type="file"  ref={ProductImage} Form/>
-
-
+                {/*<Form.Control type="file" ref={ProductImage} onChange={(e)=> { console.log(e.target.files)}}/>*/}
+                {/*<Form.Control value={imgArray} type="file" ref={ProductImage} onChange={(e)=> setImgArray(e.target.value)}/>*/}
+                <Form.Control value={imgArray} type="file" ref={ProductImage} onChange={(e)=> new ArrayBuffer(e)}/>
 
             </Form.Group>
+            {/*<Form.Group>
+                <Form.Label htmlFor="fileUpload" style={{ cursor: "pointer" }}>
+                    <Form.Control
+                        id="fileUpload"
+                        type="file"
+                    />
+                </Form.Label>
+            </Form.Group>*/}
 
 
             <Button variant="primary" type="button" onClick={addProductHandler}>
                 Submit
             </Button>
+
         </Form>
     </>
     );
