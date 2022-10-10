@@ -136,13 +136,22 @@ function AddProduct(){
 
         /*var file = this.refs.fileUpload.getInputDOMNode().files;*/
 
+        var ArrayBufferImg = async ()=> {
+            const ab = await imgInForm.arrayBuffer();
+            const ui8a = new Uint8Array(ab);
+            console.log("Uint8Array", ui8a);
+            return ui8a;
+        }
+
         var payload = {
+
+
 
 
             Name: ProductName.current.value,
             Description: ProductDescription.current.value,
             Price: ProductPrice.current.value,
-            /*Image: new ArrayBuffer(ProductImage)*/
+            Image: new ArrayBuffer(imgInForm)
 
                 /*async ()=> {
                 const ab = await ProductImage.current.arrayBuffer();
@@ -163,21 +172,27 @@ function AddProduct(){
             /*Image: createCanvas(),*/
 
         }
+        var reader = new FileReader();
+        reader.readAsDataURL(imgInForm);
+
+
+        console.log(imgInForm);
+        console.log(ArrayBufferImg);
         console.log(ProductImage);
-        console.log(imgArray);
+        /*console.log(imgArray);*/
         console.log(typeof payload.Image);
         console.log(payload.Image);
         axios.post("http://192.168.10.244:3310/api/Products/AddProductWeb",payload)//POST запрос
             .then((response)=>{
                 navigate("/");
             });
-        imgArray = new FileReader()
+       /* imgArray = new FileReader()
         imgArray.onload = function() {
 
             var arrayBuffer = new Uint8Array(imgArray.result);
             console.log(arrayBuffer);
         };
-        imgArray.readAsArrayBuffer(this.files[0]);
+        imgArray.readAsArrayBuffer(this.files[0]);*/
 
 
 
@@ -201,12 +216,74 @@ function AddProduct(){
         }
     }*/
 
-    var setImgArray;
-    var imgArray;
+    /*var setImgArray;
+    var imgArray;*/
 
 
 
+    /*function imgToArray(e){
+        var imgInForm;
+        imgInForm = e.target.files[0];
+        let fileReader = new FileReader()
+        fileReader.onload = e= {
+            // ATOB is a global method
+            // Base64 must be converted to characters
+            let bytes = atob(e.target.result.split(', ') [1])
+            download(bytes)
+        }
+        fileReader.readAsDataURL(file)
 
+
+    }
+*/
+    var imgInForm;
+
+    function onImageChange(event) {
+        const imageFile = URL.createObjectURL(event.target.files[0]);
+        createImage(imageFile, convertImage);
+    }
+
+    function createImage(imageFile, callback) {
+        const image = document.createElement('img');
+        image.onload = () => callback(image);
+        image.setAttribute('src', imageFile);
+    }
+
+    function convertImage(image) {
+        const canvas = drawImageToCanvas(image);
+        const ctx = canvas.getContext('2d');
+
+        let result = [];
+        for (let y = 0; y < canvas.height; y++) {
+            result.push([]);
+            for (let x = 0; x < canvas.width; x++) {
+                let data = ctx.getImageData(x, y, 1, 1).data;
+                result[y].push(data[0]);
+                result[y].push(data[1]);
+                result[y].push(data[2]);
+            }
+        }
+
+        const arrayCode = `
+    #define IMAGE_WIDTH ${canvas.width}
+    #define IMAGE_HEIGHT ${canvas.height}
+    #define BYTES_PER_PIXEL 3
+    uint8_t imageData[IMAGE_HEIGHT][IMAGE_WIDTH * BYTES_PER_PIXEL] = ${convertArray(result)};
+  `;
+        document.getElementById('result').innerHTML = arrayCode;
+    }
+
+    function drawImageToCanvas(image) {
+        const canvas = document.createElement('canvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        canvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height);
+        return canvas;
+    }
+
+    function convertArray(array) {
+        return JSON.stringify(array).replace(/\[/g, '{').replace(/\]/g, '}');
+    }
     return (
         <>
         <legend>Add a new product</legend>
@@ -233,7 +310,16 @@ function AddProduct(){
                 <Form.Label>Image</Form.Label>
                 {/*<Form.Control type="file" ref={ProductImage} onChange={(e)=> { console.log(e.target.files)}}/>*/}
                 {/*<Form.Control value={imgArray} type="file" ref={ProductImage} onChange={(e)=> setImgArray(e.target.value)}/>*/}
-                <Form.Control value={imgArray} type="file" ref={ProductImage} onChange={(e)=> new ArrayBuffer(e)}/>
+                {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={()=> imgInForm = document.getElementById('image')}/>*/}
+                {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={()=> imgInForm = document.getElementById('image')}/>*/}
+                <Form.Control id="image" type="file" ref={ProductImage} onChange="onImageChange(event)"/>
+                {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={async ()=> {
+                    const ab = await imgInForm.arrayBuffer();
+                    const ui8a = new Uint8Array(ab);
+                    console.log("Uint8Array", ui8a);
+                    return ui8a;
+                    ;
+                }}/>*/}
 
             </Form.Group>
             {/*<Form.Group>
