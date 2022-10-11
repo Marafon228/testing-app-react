@@ -312,7 +312,7 @@ function AddProduct(){
                 {/*<Form.Control value={imgArray} type="file" ref={ProductImage} onChange={(e)=> setImgArray(e.target.value)}/>*/}
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={()=> imgInForm = document.getElementById('image')}/>*/}
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={()=> imgInForm = document.getElementById('image')}/>*/}
-                <Form.Control id="image" type="file" ref={ProductImage} onChange="onImageChange(event)"/>
+                <Form.Control id="image" type="file" ref={ProductImage} onChange={onImageChange}/>
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={async ()=> {
                     const ab = await imgInForm.arrayBuffer();
                     const ui8a = new Uint8Array(ab);
