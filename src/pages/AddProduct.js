@@ -136,16 +136,24 @@ function AddProduct(){
 
         /*var file = this.refs.fileUpload.getInputDOMNode().files;*/
 
-        var ArrayBufferImg = async (e)=> {
+        /*var ArrayBufferImg = async (e)=> {
             const ab = await e.arrayBuffer();
             const ui8a = new Uint8Array(ab);
             console.log("Uint8Array", ui8a);
             return ui8a;
-        }
+        }*/
 
 
 
-        var img = document.getElementById('image')
+
+        var arraBufferImage =  imageFile.addEventListener("change", async event => {
+            const ab = await imageFile.files[0].arrayBuffer();
+            const ui8a = new Uint8Array(ab);
+            console.log("Uint8Array", ui8a);
+        });
+
+        var img = document.getElementById('image');
+        /*img.addEventListener("change",  )*/
         var payload = {
 
 
@@ -154,7 +162,9 @@ function AddProduct(){
             Name: ProductName.current.value,
             Description: ProductDescription.current.value,
             Price: ProductPrice.current.value,
-            Image: ArrayBufferImg(document.getElementById('image'))
+
+
+            /*Image: ArrayBufferImg(document.getElementById('image'))*/
 
                 /*async ()=> {
                 const ab = await ProductImage.current.arrayBuffer();
@@ -183,7 +193,9 @@ function AddProduct(){
         console.log(ArrayBufferImg);
         console.log(ProductImage);*/
         /*console.log(imgArray);*/
+        console.log(arraBufferImage)
         console.log(img)
+        /*console.log(immge)*/
         console.log(typeof payload.Image);
         console.log(payload.Image);
         axios.post("http://192.168.10.244:3310/api/Products/AddProductWeb",payload)//POST запрос
@@ -288,6 +300,11 @@ function AddProduct(){
     function convertArray(array) {
         return JSON.stringify(array).replace(/\[/g, '{').replace(/\]/g, '}');
     }*/
+
+    var imageFile;
+    console.log(new ArrayBuffer(imageFile));
+
+
     return (
         <>
         <legend>Add a new product</legend>
@@ -316,7 +333,7 @@ function AddProduct(){
                 {/*<Form.Control value={imgArray} type="file" ref={ProductImage} onChange={(e)=> setImgArray(e.target.value)}/>*/}
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={()=> imgInForm = document.getElementById('image')}/>*/}
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={()=> imgInForm = document.getElementById('image')}/>*/}
-                <Form.Control id="image" type="file" ref={ProductImage} />
+                <Form.Control id="image" type="file" ref={ProductImage} onChange={(e) => imageFile = e.target.files} />
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={async ()=> {
                     const ab = await imgInForm.arrayBuffer();
                     const ui8a = new Uint8Array(ab);
