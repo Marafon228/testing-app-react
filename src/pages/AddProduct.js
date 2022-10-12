@@ -41,7 +41,38 @@ function AddProduct(){
         ('#yourImage').attr('src', e.target.result);
     }*/
 
+    /*function imgToArray(){
+        document.querySelector('#inputImage').addEventListener('change', function() {
+
+            var reader = new FileReader();
+            reader.onload = function() {
+
+                var arrayBuffer = new Uint8Array(reader.result);
+                console.log(arrayBuffer);
+            };
+            reader.readAsArrayBuffer(this.files[0]);
+        });
+    }*/
+    /*var imgOnClicks;
+
+    function onClicks(){
+        var img = document.querySelector('#image')
+        img.addEventListener('change', function() {
+            var reader = new FileReader();
+
+            reader.onload = function () {
+
+                var arrayBuffer = new Uint8Array(reader.result);
+                imgOnClicks = arrayBuffer;
+                console.log(arrayBuffer);
+            };
+            reader.readAsArrayBuffer(this.files[0]);
+        })
+    }*/
+
     function addProductHandler(){
+        /*onClicks()*/
+       /* imgToArray()*/
 
         /*console.log(typeof document.getElementById('inputImage'))*/
 
@@ -146,14 +177,19 @@ function AddProduct(){
 
 
 
-        var arraBufferImage =  imageFile.addEventListener("change", async event => {
+        /*var arraBufferImage =  imageFile.addEventListener("change", async event => {
             const ab = await imageFile.files[0].arrayBuffer();
             const ui8a = new Uint8Array(ab);
             console.log("Uint8Array", ui8a);
-        });
+        });*/
 
         var img = document.getElementById('image');
         /*img.addEventListener("change",  )*/
+
+
+
+
+
         var payload = {
 
 
@@ -162,6 +198,7 @@ function AddProduct(){
             Name: ProductName.current.value,
             Description: ProductDescription.current.value,
             Price: ProductPrice.current.value,
+            Image: viewArray
 
 
             /*Image: ArrayBufferImg(document.getElementById('image'))*/
@@ -193,12 +230,21 @@ function AddProduct(){
         console.log(ArrayBufferImg);
         console.log(ProductImage);*/
         /*console.log(imgArray);*/
-        console.log(arraBufferImage)
-        console.log(img)
+        /*imageFile.files[0].arrayBuffer().then(resp=>{
+            let ui8 = new Uint8Array(resp);
+            let rawData = [...ui8];
+            console.log(rawData);
+        });*/
+       /* console.log(imgOnClicks)*/
+        /*console.log(imageFile)
+        console.log(ProductImage.current)
+        console.log(imgInProductImage)*/
+        /*console.log(arraBufferImage)*/
+        /*console.log(img)*/
         /*console.log(immge)*/
         console.log(typeof payload.Image);
         console.log(payload.Image);
-        axios.post("http://192.168.10.244:3310/api/Products/AddProductWeb",payload)//POST запрос
+        axios.post("http://localhost/api/Products/AddProductWeb",payload)//POST запрос
             .then((response)=>{
                 navigate("/");
             });
@@ -302,13 +348,52 @@ function AddProduct(){
     }*/
 
     var imageFile;
-    console.log(new ArrayBuffer(imageFile));
+    /*console.log(new ArrayBuffer(imageFile));*/
+    var imgInProductImage;
+
+    /*const blobToArrayBuffer = require("blob-to-arraybuffer");
+
+    blobToArrayBuffer(imageFile).then(buffer => {
+        // hurrah!
+    });
+
+    fetch(imageFile)
+        .then(res => res.blob)
+        .then(blobToArrayBuffer)
+        .then(buffer => {
+
+        });
+*/
 
 
+    /*imageFile.files[0].arrayBuffer().then(resp=>{
+        let ui8 = new Uint8Array(resp);
+        let rawData = [...ui8];
+    })*/
+
+    var viewArray = [];
+    function inputImage(){
+        var img = document.querySelector('#image')
+        img.addEventListener('change', function() {
+            var reader = new FileReader();
+
+            reader.onload = function () {
+
+                var arrayBuffer = new Uint8Array(reader.result);
+                console.log(arrayBuffer);
+                viewArray = Array.from(arrayBuffer);
+            };
+            reader.readAsArrayBuffer(this.files[0]);
+
+        })
+
+    }
     return (
         <>
+
         <legend>Add a new product</legend>
         <Form>
+
             <Form.Group className="mb-3" controlId="formProductName">
                 <Form.Label>Name</Form.Label>
                 <Form.Control type="text" ref={ProductName}/>
@@ -333,7 +418,18 @@ function AddProduct(){
                 {/*<Form.Control value={imgArray} type="file" ref={ProductImage} onChange={(e)=> setImgArray(e.target.value)}/>*/}
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={()=> imgInForm = document.getElementById('image')}/>*/}
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={()=> imgInForm = document.getElementById('image')}/>*/}
-                <Form.Control id="image" type="file" ref={ProductImage} onChange={(e) => imageFile = e.target.files} />
+                {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={(e) => imageFile = e.target.files} />*/}
+                <Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />
+                {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={(e) => {
+                    imageFile = e.target.files
+                    imageFile.addEventListener("change", async event => {
+                        const ab = await imageFile.files[0].arrayBuffer();
+                        const ui8a = new Uint8Array(ab);
+                        imgInProductImage = ui8a;
+                        console.log("Uint8Array", ui8a);
+                    });
+
+                }} />*/}
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={async ()=> {
                     const ab = await imgInForm.arrayBuffer();
                     const ui8a = new Uint8Array(ab);
@@ -351,6 +447,8 @@ function AddProduct(){
                     />
                 </Form.Label>
             </Form.Group>*/}
+
+
 
 
             <Button variant="primary" type="button" onClick={addProductHandler}>
