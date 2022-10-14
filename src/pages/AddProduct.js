@@ -183,7 +183,7 @@ function AddProduct(){
             console.log("Uint8Array", ui8a);
         });*/
 
-        var img = document.getElementById('image');
+        /*var img = document.getElementById('image');*/
         /*img.addEventListener("change",  )*/
 
 
@@ -244,7 +244,7 @@ function AddProduct(){
         /*console.log(immge)*/
         console.log(typeof payload.Image);
         console.log(payload.Image);
-        axios.post("http://localhost/api/Products/AddProductWeb",payload)//POST запрос
+        axios.post("http://192.168.0.101:3310/api/Products/AddProductWeb",payload)//POST запрос
             .then((response)=>{
                 navigate("/");
             });
@@ -347,9 +347,9 @@ function AddProduct(){
         return JSON.stringify(array).replace(/\[/g, '{').replace(/\]/g, '}');
     }*/
 
-    var imageFile;
+    /*var imageFile;*/
     /*console.log(new ArrayBuffer(imageFile));*/
-    var imgInProductImage;
+    /*var imgInProductImage;*/
 
     /*const blobToArrayBuffer = require("blob-to-arraybuffer");
 

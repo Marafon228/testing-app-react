@@ -20,7 +20,7 @@ function AllShop(){
 
     useEffect(()=>
     {
-        axios.get("http://localhost/api/Products/GetProducts")
+        axios.get("http://192.168.0.101:3310/api/Products/GetProducts")
             .then((response)=>{
                 setShop((existingData)=>{
                         return response.data;
