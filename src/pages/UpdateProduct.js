@@ -10,18 +10,20 @@ function UpdateProduct () {
     const ProductDescription = useRef("");
     const ProductPrice = useRef("");
     const ProductImage = useRef("");
+    const CurrentProductImage = useRef("");
 
 
-    const {id} = useParams();
-
+    const {Id} = useParams();
+    var img;
     useEffect(()=>
     {
-        axios.get(`http://localhost/api/Products/EditProduct/${id}`)
+        axios.get(`http://192.168.0.101:3310/api/Products/GetProductFromId?id=${Id}`)
             .then((response)=> {
                 ProductName.current.value = response.data.Name;
                 ProductDescription.current.value = response.data.Description;
                 ProductPrice.current.value = response.data.Price;
-                ProductImage.current.value = response.data.Image;
+                CurrentProductImage.current.value = response.data.Image;
+
 
             })
 
@@ -76,9 +78,8 @@ function UpdateProduct () {
             <Form.Group className="mb-3" controlId="formProductImage">
                 <Form.Label>Image</Form.Label>
                 <Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />
-
-
             </Form.Group>
+            <img id="blah"  ref={ProductImage} src = {`data:image/png;base64,${ProductImage}`} alt="your image" />
             <Button variant="primary" type="button" onClick={updateProductHandler}>
                 Submit
             </Button>

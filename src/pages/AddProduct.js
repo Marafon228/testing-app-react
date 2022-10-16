@@ -244,7 +244,7 @@ function AddProduct(){
         /*console.log(immge)*/
         console.log(typeof payload.Image);
         console.log(payload.Image);
-        axios.post("http://localhost/api/Products/AddProductWeb",payload)//POST запрос
+        axios.post("http://192.168.0.101:3310/api/Products/AddProductWeb",payload)//POST запрос
             .then((response)=>{
                 navigate("/");
             });

@@ -13,7 +13,7 @@ function App() {
           </Routes>
           <Routes>
               <Route path="/add-product" element={<AddProduct></AddProduct>}></Route>
-              <Route path="/update-product/:id" element={<UpdateProduct></UpdateProduct>}></Route>
+              <Route path="/update-product/:Id" element={<UpdateProduct></UpdateProduct>}></Route>
           </Routes>
       </Layout>
 

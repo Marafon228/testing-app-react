@@ -20,7 +20,7 @@ function AllShop(){
 
     useEffect(()=>
     {
-        axios.get("http://localhost/api/Products/GetProducts")
+        axios.get("http://192.168.0.101:3310/api/Products/GetProducts")
             .then((response)=>{
                 setShop((existingData)=>{
                         return response.data;
@@ -51,11 +51,12 @@ function AllShop(){
                         {/*<Card.Img variant="top" style={{borderRadius : '50%'}} src={`data:image/${sp.Image};base64,${encodeBase64(sp.Image)}`} />*/}
                         {/*<Card.Img variant="top" src={encodeBase64(sp.Image)}  />*/}
                         <Card.Body>
+                            <Card.Title>{sp.Id}</Card.Title>
                             <Card.Title>{sp.Name}</Card.Title>
                             <Card.Text>
                                 <b>Price:</b>{sp.Price}
                             </Card.Text>
-                            <Button variant="primary" type="button" onClick={()=> {navigate(`/update-product/${sp.id}`);}}>
+                            <Button variant="primary" type="button" onClick={()=> {navigate(`/update-product/${sp.Id}`);}}>
                                 Edit
                             </Button>
 
