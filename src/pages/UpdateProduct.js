@@ -2,7 +2,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {useEffect, useRef} from "react";
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 function UpdateProduct () {
 
@@ -11,6 +11,8 @@ function UpdateProduct () {
     const ProductPrice = useRef("");
     const ProductImage = useRef("");
     const CurrentProductImage = useRef("");
+
+    const navigate = useNavigate();
 
 
     const {Id} = useParams();
@@ -22,8 +24,8 @@ function UpdateProduct () {
                 ProductName.current.value = response.data.Name;
                 ProductDescription.current.value = response.data.Description;
                 ProductPrice.current.value = response.data.Price;
+                ProductImage.current.value = response.data.Image;
                 CurrentProductImage.current.value = response.data.Image;
-
 
             })
 
@@ -31,7 +33,18 @@ function UpdateProduct () {
 
 
     function updateProductHandler(){
+        var payload = {
+            Id: Id,
+            Name: ProductName.current.value,
+            Description: ProductDescription.current.value,
+            Price: ProductPrice.current.value,
+            Image:viewArray
 
+        };
+        axios.put(`http://192.168.0.101:3310/api/Products/EditProduct?id=${Id}`, payload)
+            .then((response)=>{
+                navigate("/");
+            });
     }
 
     var viewArray = [];
@@ -51,6 +64,7 @@ function UpdateProduct () {
         })
 
     }
+
 
     return<>
 
@@ -79,10 +93,17 @@ function UpdateProduct () {
                 <Form.Label>Image</Form.Label>
                 <Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />
             </Form.Group>
-            <img id="blah"  ref={ProductImage} src = {`data:image/png;base64,${ProductImage}`} alt="your image" />
-            <Button variant="primary" type="button" onClick={updateProductHandler}>
-                Submit
-            </Button>
+            <Form.Label>Image Preview</Form.Label>
+            <Form.Group>
+                <img id="blah" ref={CurrentProductImage} src = {`data:image/png;base64,${CurrentProductImage.current.value}`} width="350px" height="350px"/>
+            </Form.Group>
+            <Form.Group>
+                <Button variant="primary" type="button" onClick={updateProductHandler}>
+                    Submit
+                </Button>
+            </Form.Group>
+
+
 
         </Form>
     </>
