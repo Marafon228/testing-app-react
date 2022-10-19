@@ -15,23 +15,37 @@ function UpdateProduct () {
     const navigate = useNavigate();
 
 
+
     const {Id} = useParams();
-    var img;
+
+    let img;
+
     useEffect(()=>
     {
-        axios.get(`http://192.168.0.101:3310/api/Products/GetProductFromId?id=${Id}`)
+        axios.get(`http://localhost/api/Products/GetProductFromId?id=${Id}`)
             .then((response)=> {
                 ProductName.current.value = response.data.Name;
                 ProductDescription.current.value = response.data.Description;
                 ProductPrice.current.value = response.data.Price;
                 ProductImage.current.value = response.data.Image;
                 CurrentProductImage.current.value = response.data.Image;
-
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log('Error', error.message);
+                }
             })
 
     },[]);
-
-
+    console.log(img)
+    console.log(ProductImage.current.value)
+    console.log(ProductName.current.value)
     function updateProductHandler(){
         var payload = {
             Id: Id,
@@ -41,13 +55,13 @@ function UpdateProduct () {
             Image:viewArray
 
         };
-        axios.put(`http://192.168.0.101:3310/api/Products/EditProduct?id=${Id}`, payload)
+        axios.put(`http://localhost/api/Products/EditProduct?id=${Id}`, payload)
             .then((response)=>{
                 navigate("/");
             });
     }
 
-    var viewArray = [];
+    var viewArray;
     function inputImage(){
         var img = document.querySelector('#image')
         img.addEventListener('change', function() {
