@@ -22,7 +22,7 @@ function UpdateProduct () {
 
     useEffect(()=>
     {
-        axios.get(`http://localhost/api/Products/GetProductFromId?id=${Id}`)
+        axios.get(`http://192.168.0.101:3310/api/Products/GetProductFromId?id=${Id}`)
             .then((response)=> {
                 ProductName.current.value = response.data.Name;
                 ProductDescription.current.value = response.data.Description;
@@ -43,9 +43,9 @@ function UpdateProduct () {
             })
 
     },[]);
-    console.log(img)
+    /*console.log(img)
     console.log(ProductImage.current.value)
-    console.log(ProductName.current.value)
+    console.log(ProductName.current.value)*/
     function updateProductHandler(){
         var payload = {
             Id: Id,
@@ -55,7 +55,7 @@ function UpdateProduct () {
             Image:viewArray
 
         };
-        axios.put(`http://localhost/api/Products/EditProduct?id=${Id}`, payload)
+        axios.put(`http://192.168.0.101:3310/api/Products/EditProduct?id=${Id}`, payload)
             .then((response)=>{
                 navigate("/");
             });
@@ -77,6 +77,10 @@ function UpdateProduct () {
 
         })
 
+    }
+
+    function viewImg(){
+        console.log(CurrentProductImage.current.value)
     }
 
 
@@ -101,19 +105,22 @@ function UpdateProduct () {
                 <Form.Label>Price</Form.Label>
                 <Form.Control type="integer"  ref={ProductPrice}/>
 
-            </Form.Group>
+            </Form.Group> 
 
             <Form.Group className="mb-3" controlId="formProductImage">
                 <Form.Label>Image</Form.Label>
+                {/*<Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />*/}
                 <Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />
             </Form.Group>
             <Form.Label>Image Preview</Form.Label>
             <Form.Group>
-                <img id="blah" ref={CurrentProductImage} src = {`data:image/png;base64,${CurrentProductImage.current.value}`} width="350px" height="350px"/>
+                <img id="blah" ref={CurrentProductImage} src={`data:image/png;base64,${CurrentProductImage.current.value}`} width="350px" height="350px"/>
             </Form.Group>
             <Form.Group>
                 <Button variant="primary" type="button" onClick={updateProductHandler}>
                     Submit
+                </Button><Button variant="primary" type="button" onClick={viewImg}>
+                viewImg
                 </Button>
             </Form.Group>
 
