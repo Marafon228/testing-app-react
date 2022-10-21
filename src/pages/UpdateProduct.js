@@ -23,12 +23,13 @@ function UpdateProduct () {
 
     useEffect(()=>
     {
-        axios.get(`http://192.168.0.101:3310/api/Products/GetProductFromId?id=${Id}`)
+        axios.get(`http://localhost/api/Products/GetProductFromId?id=${Id}`)
             .then((response)=> {
                 ProductName.current.value = response.data.Name;
                 ProductDescription.current.value = response.data.Description;
                 ProductPrice.current.value = response.data.Price;
-               // ProductImage.current.value = response.data.Image;// Если убрать preview будет видно
+                //ProductImage.current.value = response.data.Image;// Если убрать preview будет видно
+                //ProductImage.current.value = `data:image/png;base64,${response.data.Image}`
                 CurrentProductImage.current.value = response.data.Image;
             })
             .catch(function (error) {
@@ -56,7 +57,7 @@ function UpdateProduct () {
             Image:viewArray
 
         };
-        axios.put(`http://192.168.0.101:3310/api/Products/EditProduct?id=${Id}`, payload)
+        axios.put(`http://localhost/api/Products/EditProduct?id=${Id}`, payload)
             .then((response)=>{
                 navigate("/");
             });
@@ -90,6 +91,10 @@ function UpdateProduct () {
 
 
     }
+    let immage1;
+    function loadStartInput(){
+        immage1 = `data:image/png;base64,CurrentProductImage.current.value`
+    }
 
 
 
@@ -118,7 +123,7 @@ function UpdateProduct () {
             <Form.Group className="mb-3" controlId="formProductImage">
                 <Form.Label>Image</Form.Label>
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />*/}
-                <Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} value={ProductImage.current.value} />
+                <Form.Control id="image" type="file" defaultValue={immage1} ref={ProductImage} onInput={inputImage} onLoadStart={loadStartInput} />
             </Form.Group>
             <Form.Label>Image Preview</Form.Label>
             <Form.Group>
