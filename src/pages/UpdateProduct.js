@@ -19,6 +19,7 @@ function UpdateProduct () {
     const {Id} = useParams();
 
     let img;
+    let img1;
 
     useEffect(()=>
     {
@@ -27,7 +28,7 @@ function UpdateProduct () {
                 ProductName.current.value = response.data.Name;
                 ProductDescription.current.value = response.data.Description;
                 ProductPrice.current.value = response.data.Price;
-                ProductImage.current.value = response.data.Image;
+               // ProductImage.current.value = response.data.Image;// Если убрать preview будет видно
                 CurrentProductImage.current.value = response.data.Image;
             })
             .catch(function (error) {
@@ -80,8 +81,16 @@ function UpdateProduct () {
     }
 
     function viewImg(){
+        console.log(img1)
+        console.log(img)
         console.log(CurrentProductImage.current.value)
     }
+
+    function loadImage(){
+
+
+    }
+
 
 
     return<>
@@ -105,16 +114,17 @@ function UpdateProduct () {
                 <Form.Label>Price</Form.Label>
                 <Form.Control type="integer"  ref={ProductPrice}/>
 
-            </Form.Group> 
-
+            </Form.Group>
             <Form.Group className="mb-3" controlId="formProductImage">
                 <Form.Label>Image</Form.Label>
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />*/}
-                <Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />
+                <Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} value={ProductImage.current.value} />
             </Form.Group>
             <Form.Label>Image Preview</Form.Label>
             <Form.Group>
                 <img id="blah" ref={CurrentProductImage} src={`data:image/png;base64,${CurrentProductImage.current.value}`} width="350px" height="350px"/>
+                <img id="blah1" src={`data:image/png;base64,${CurrentProductImage.current.value}`} onLoad={loadImage} />
+
             </Form.Group>
             <Form.Group>
                 <Button variant="primary" type="button" onClick={updateProductHandler}>
