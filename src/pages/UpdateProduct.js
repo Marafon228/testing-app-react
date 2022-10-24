@@ -23,7 +23,7 @@ function UpdateProduct () {
 
     useEffect(()=>
     {
-        axios.get(`http://localhost/api/Products/GetProductFromId?id=${Id}`)
+        axios.get(`http://192.168.0.101:3310/api/Products/GetProductFromId?id=${Id}`)
             .then((response)=> {
                 ProductName.current.value = response.data.Name;
                 ProductDescription.current.value = response.data.Description;
@@ -43,7 +43,6 @@ function UpdateProduct () {
                     console.log('Error', error.message);
                 }
             })
-
     },[]);
     /*console.log(img)
     console.log(ProductImage.current.value)
@@ -57,7 +56,7 @@ function UpdateProduct () {
             Image:viewArray
 
         };
-        axios.put(`http://localhost/api/Products/EditProduct?id=${Id}`, payload)
+        axios.put(`http://192.168.0.101:3310/api/Products/EditProduct?id=${Id}`, payload)
             .then((response)=>{
                 navigate("/");
             });
@@ -78,7 +77,21 @@ function UpdateProduct () {
             reader.readAsArrayBuffer(this.files[0]);
 
         })
-
+        let imgInp = document.getElementById('image')
+        imgInp = new Image();
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                let bl = document.getElementById('blah');
+                bl.src = URL.createObjectURL(file)
+            }
+        }
+        /*imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
+        }*/
     }
 
     function viewImg(){
@@ -88,13 +101,18 @@ function UpdateProduct () {
     }
 
     function loadImage(){
-
+        var img = document.getElementById('blah1');
+        img.onload = function() { alert("Height: " + this.height); }
+        img.src = `data:image/png;base64,CurrentProductImage.current.value`;
 
     }
     let immage1;
     function loadStartInput(){
         immage1 = `data:image/png;base64,CurrentProductImage.current.value`
     }
+
+
+
 
 
 
@@ -127,6 +145,7 @@ function UpdateProduct () {
             </Form.Group>
             <Form.Label>Image Preview</Form.Label>
             <Form.Group>
+
                 <img id="blah" ref={CurrentProductImage} src={`data:image/png;base64,${CurrentProductImage.current.value}`} width="350px" height="350px"/>
                 <img id="blah1" src={`data:image/png;base64,${CurrentProductImage.current.value}`} onLoad={loadImage} />
 
