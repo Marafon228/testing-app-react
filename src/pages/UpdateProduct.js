@@ -23,7 +23,7 @@ function UpdateProduct () {
 
     useEffect(()=>
     {
-        axios.get(`http://192.168.0.101:3310/api/Products/GetProductFromId?id=${Id}`)
+        axios.get(`http://192.168.100.123:3310/api/Products/GetProductFromId?id=${Id}`)
             .then((response)=> {
                 ProductName.current.value = response.data.Name;
                 ProductDescription.current.value = response.data.Description;
@@ -56,7 +56,7 @@ function UpdateProduct () {
             Image:viewArray
 
         };
-        axios.put(`http://192.168.0.101:3310/api/Products/EditProduct?id=${Id}`, payload)
+        axios.put(`http://192.168.100.123:3310/api/Products/EditProduct?id=${Id}`, payload)
             .then((response)=>{
                 navigate("/");
             });
@@ -93,28 +93,19 @@ function UpdateProduct () {
             }
         }*/
     }
-
     function viewImg(){
         console.log(img1)
         console.log(img)
         console.log(CurrentProductImage.current.value)
+        img = document.getElementById('blah')
+        img.src = `data:image/png;base64,${CurrentProductImage.current.value}`;
     }
-
-    function loadImage(){
-        var img = document.getElementById('blah1');
-        img.onload = function() { alert("Height: " + this.height); }
+    /*function loadImage(){
+        var img = new Image()
+        img.onload = function() { alert("Height: " + this.height); };
+        img = document.getElementById('blah1');
         img.src = `data:image/png;base64,CurrentProductImage.current.value`;
-
-    }
-    let immage1;
-    function loadStartInput(){
-        immage1 = `data:image/png;base64,CurrentProductImage.current.value`
-    }
-
-
-
-
-
+    }*/
 
     return<>
 
@@ -141,21 +132,26 @@ function UpdateProduct () {
             <Form.Group className="mb-3" controlId="formProductImage">
                 <Form.Label>Image</Form.Label>
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />*/}
-                <Form.Control id="image" type="file" defaultValue={immage1} ref={ProductImage} onInput={inputImage} onLoadStart={loadStartInput} />
+                <Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />
             </Form.Group>
-            <Form.Label>Image Preview</Form.Label>
+            <Form.Group>
+                <Button variant="primary" type="button" onClick={viewImg} >
+                    View image preview
+                </Button>
+            </Form.Group>
             <Form.Group>
 
-                <img id="blah" ref={CurrentProductImage} src={`data:image/png;base64,${CurrentProductImage.current.value}`} width="350px" height="350px"/>
-                <img id="blah1" src={`data:image/png;base64,${CurrentProductImage.current.value}`} onLoad={loadImage} />
+                <Form.Label >Image Preview</Form.Label>
+            </Form.Group>
 
+            <Form.Group>
+                <img id="blah" ref={CurrentProductImage} src={`data:image/png;base64,${CurrentProductImage.current.value}`} width="350px" height="350px"/>
             </Form.Group>
             <Form.Group>
                 <Button variant="primary" type="button" onClick={updateProductHandler}>
                     Submit
-                </Button><Button variant="primary" type="button" onClick={viewImg}>
-                viewImg
                 </Button>
+
             </Form.Group>
 
 
