@@ -23,7 +23,7 @@ function UpdateProduct () {
 
     useEffect(()=>
     {
-        axios.get(`http://192.168.100.123:3310/api/Products/GetProductFromId?id=${Id}`)
+        axios.get(`http://192.168.0.101:3310/api/Products/GetProductFromId?id=${Id}`)
             .then((response)=> {
                 ProductName.current.value = response.data.Name;
                 ProductDescription.current.value = response.data.Description;
@@ -56,7 +56,7 @@ function UpdateProduct () {
             Image:viewArray
 
         };
-        axios.put(`http://192.168.100.123:3310/api/Products/EditProduct?id=${Id}`, payload)
+        axios.put(`http://192.168.0.101:3310/api/Products/EditProduct?id=${Id}`, payload)
             .then((response)=>{
                 navigate("/");
             });
