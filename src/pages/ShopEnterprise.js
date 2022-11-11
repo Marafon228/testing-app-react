@@ -8,6 +8,8 @@ function ShopEnterprise(props) {
 
     const navigate = useNavigate();
 
+
+
     const [shop, setShop] = useState([])
 
     useEffect(()=>
@@ -38,7 +40,7 @@ function ShopEnterprise(props) {
                     <Card>
                         {/*<Card.Img variant={"top"} src = {sp.Image((im)=> {})} />*/}
                         {/*<Card.Img variant={"top"} src = {`data:image/png;base64,${sp.Image}`} width="100px" height="350px"/>*/}
-                        {/*<Card.Img variant="top" style={{borderRadius : '50%'}} src={`data:image/${sp.Image};base64,${encodeBase64(sp.Image)}`} />*/}
+                        {/*<Card.Img variant="top" styles={{borderRadius : '50%'}} src={`data:image/${sp.Image};base64,${encodeBase64(sp.Image)}`} />*/}
                         {/*<Card.Img variant="top" src={encodeBase64(sp.Image)}  />*/}
                         <Card.Body>
                             <Card.Title>{sp.Id}</Card.Title>

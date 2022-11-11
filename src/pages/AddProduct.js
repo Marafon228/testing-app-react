@@ -440,7 +440,7 @@ function AddProduct(){
 
             </Form.Group>
             {/*<Form.Group>
-                <Form.Label htmlFor="fileUpload" style={{ cursor: "pointer" }}>
+                <Form.Label htmlFor="fileUpload" styles={{ cursor: "pointer" }}>
                     <Form.Control
                         id="fileUpload"
                         type="file"

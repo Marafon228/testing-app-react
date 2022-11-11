@@ -1,10 +1,11 @@
 import './App.css';
 import Layout from "./components/shared/Layout";
-import AllShop from "./pages/AllShop";
+import EnterpriseProducts from "./pages/EnterpriseProducts";
 import {Route, Routes} from "react-router-dom";
 import AddProduct from "./pages/AddProduct";
 import UpdateProduct from "./pages/UpdateProduct";
 import ShopEnterprise from "./pages/ShopEnterprise";
+
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           </Routes>
           <Routes>
               <Route path="/add-product" element={<AddProduct></AddProduct>}></Route>
-              <Route path="/view-product" element={<AllShop></AllShop>}></Route>
+              <Route path="/view-product/:Id" element={<EnterpriseProducts></EnterpriseProducts>}></Route>
               <Route path="/update-product/:Id" element={<UpdateProduct></UpdateProduct>}></Route>
           </Routes>
       </Layout>
