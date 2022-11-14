@@ -19,7 +19,7 @@ function Register() {
         let item={firsName,midleName,lastName,adress,phone,email,password,login}
         //console.warn(item)
 
-        let result = await fetch("http://192.168.101.25:3310/api/Users/RegisterUser",{
+        let result = await fetch("http://192.168.0.101:3310/api/Users/RegisterUser",{
             method:'POST',
             body:JSON.stringify(item),
             headers:{

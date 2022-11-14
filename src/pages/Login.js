@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-//import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 //import Header from './Header'
 
 function Login() {
@@ -7,15 +7,15 @@ function Login() {
     const [password,setPassword] = useState("");
 
 
-    //const history = useHistory();
+    const navigate = useNavigate();
     useEffect(() => {
         if (localStorage.getItem('user-info')) {
-            //history.push("/add")
+            navigate('/')
         }
     }, [])
     async function Login(){
         let item={login,password};
-        let result = await fetch("http://192.168.101.25:3310/api/Users/SignIn",{
+        let result = await fetch("http://192.168.0.101:3310/api/Users/SignIn",{
             method: 'POST',
             headers:{
                 "Content-Type":"application/json",
@@ -25,7 +25,7 @@ function Login() {
         });
         result = await result.json();
         localStorage.setItem("user-info",JSON.stringify(result))
-        //history.push("/add")
+        navigate('/')
     }
     return (
         <div>
