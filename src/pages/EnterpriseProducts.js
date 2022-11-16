@@ -27,10 +27,10 @@ function EnterpriseProducts(){
     const {Id} = useParams();
 
 
-    useEffect(()=>
+   /* useEffect(()=>
     {
         //dispatch(productList())
-        axios.get(`http://192.168.0.101:3310/api/Products/GetProductFromEnterpriseId?id=${Id}`)
+        axios.get(`http://192.168.101.25:3310/api/Products/GetProductFromEnterpriseId?id=${Id}`)
             .then((response)=>{
                 setShop((existingData)=>{
                         return response.data;
@@ -38,7 +38,7 @@ function EnterpriseProducts(){
                 )
             })
 
-    },[])
+    },[])*/
 
     useEffect(()=>{
         dispatch(productList())
@@ -54,8 +54,8 @@ function EnterpriseProducts(){
         </Row>*/}
 
         <Row xs={1} md={3} className="g-4">
-            {shop.map((sp) => (
-                <Col key={sp.id}>
+            {data.map((sp) => (
+                <Col key={sp.Id}>
                     <Card>
                         {/*<Card.Img variant={"top"} src = {sp.Image((im)=> {})} />*/}
                         <Card.Img variant={"top"} src = {`data:image/png;base64,${sp.Image}`} width="100px" height="350px"/>

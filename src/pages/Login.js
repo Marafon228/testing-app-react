@@ -15,7 +15,7 @@ function Login() {
     }, [])
     async function Login(){
         let item={login,password};
-        let result = await fetch("http://192.168.0.101:3310/api/Users/SignIn",{
+        let result = await fetch("http://192.168.101.25:3310/api/Users/SignIn",{
             method: 'POST',
             headers:{
                 "Content-Type":"application/json",
