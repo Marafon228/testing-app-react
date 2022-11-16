@@ -3,6 +3,9 @@ import {useEffect, useState} from "react";
 import {Card, Col, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {useNavigate, useParams} from "react-router-dom";
+import {productList} from "../redux/productAction";
+import {useDispatch, useSelector} from "react-redux";
+import {addToCart, removeToCart} from "../redux/action";
 
 
 
@@ -10,6 +13,11 @@ import {useNavigate, useParams} from "react-router-dom";
 
 
 function EnterpriseProducts(){
+
+    const dispatch = useDispatch();
+    let data = useSelector((state)=>state.productData);
+    //let shop = useSelector((state)=>state.productData);
+    console.warn("data in main component", data);
 
 
     const navigate = useNavigate();
@@ -21,6 +29,7 @@ function EnterpriseProducts(){
 
     useEffect(()=>
     {
+        //dispatch(productList())
         axios.get(`http://192.168.0.101:3310/api/Products/GetProductFromEnterpriseId?id=${Id}`)
             .then((response)=>{
                 setShop((existingData)=>{
@@ -31,16 +40,18 @@ function EnterpriseProducts(){
 
     },[])
 
-
+    useEffect(()=>{
+        dispatch(productList())
+    },[])
 
     return<>
-        <Row>
+        {/*<Row>
             <Col md={{ span: 4, offset: 4}}>
                 <Button variant="primary" type="button" onClick={()=> {navigate("/add-product");}}>
                     Add a product
                 </Button>
             </Col>
-        </Row>
+        </Row>*/}
 
         <Row xs={1} md={3} className="g-4">
             {shop.map((sp) => (
@@ -56,9 +67,15 @@ function EnterpriseProducts(){
                             <Card.Text>
                                 <b>Price:</b>{sp.Price}
                             </Card.Text>
-                            <Button variant="primary" type="button" onClick={()=> {navigate(`/update-product/${sp.Id}`);}}>
-                                Edit
+                            <Button variant="primary" type="button" onClick={()=> dispatch(addToCart(sp))}>
+                                Add to cart
                             </Button>
+                            <Button variant="primary" type="button" onClick={()=> dispatch(removeToCart(sp.Id))}>
+                                Remove to cart
+                            </Button>
+                            {/*<Button variant="primary" type="button" onClick={()=> {navigate(`/update-product/${sp.Id}`);}}>
+                                Edit
+                            </Button>*/}
 
                         </Card.Body>
                     </Card>

@@ -1,9 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { productSearch } from '../../redux/productAction'
-//import Container from 'react-bootstrap/Container';
-import {Navbar,Nav, NavDropdown,Container} from 'react-bootstrap';
-import { useNavigate} from 'react-router-dom'
-import {emptyCart} from "../../redux/action";
+import { productSearch } from '../redux/productAction'
+import Container from 'react-bootstrap/Container';
+import {Navbar,Nav, NavDropdown} from 'react-bootstrap';
+import {Link, useNavigate} from 'react-router-dom'
 
 function Layout(props){
     const result = useSelector((state) => state.cartData);
@@ -16,6 +15,7 @@ function Layout(props){
         navigate('/')
     }
 
+
     return<>
         <Navbar bg="primary" variant="dark" expand="lg">
             <Container>
@@ -26,23 +26,18 @@ function Layout(props){
                 {
                     localStorage.getItem('user-info') ?
                         <>
-                            {/*<Nav.Link href={'/add'}>add prod</Nav.Link>
-                            <Nav.Link href={'/update'}>update prod</Nav.Link>*/}
+                            <Nav.Link href={'/add'}>add prod</Nav.Link>
+                            <Nav.Link href={'/update'}>update prod</Nav.Link>
 
                             <div className='search-box'>
                                 <input type="text" onChange={(event) => dispatch(productSearch(event.target.value))} placeholder='Search Product' />
                             </div>
-                            <Nav.Link href={'/cart'} >
+                            <Link to="/cart">
                                 <div className="cart-div">
                                     <span>{result.length}</span>
                                     <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="" />
-
                                 </div>
-                            </Nav.Link>
-                            <div className='search-box'>
-                                <button onClick={() => dispatch(emptyCart())}>Empty Cart</button>
-                            </div>
-
+                            </Link>
                         </>
                         :
                         <>
@@ -52,13 +47,13 @@ function Layout(props){
                 }
             </Nav>
             {localStorage.getItem('user-info') ?
-            <Nav>
-                <NavDropdown title={user && user.Login}>
-                    <NavDropdown.Item onClick={logout}>
-                        Logout
-                    </NavDropdown.Item>
-                </NavDropdown>
-            </Nav>
+                <Nav>
+                    <NavDropdown title={user && user.Login}>
+                        <NavDropdown.Item onClick={logout}>
+                            Logout
+                        </NavDropdown.Item>
+                    </NavDropdown>
+                </Nav>
                 : null}
         </Navbar>
         <Container>
