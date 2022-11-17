@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
     const cartData = useSelector((state) => state.cartData);
-    let amount = cartData.length && cartData.map(item=>item.price).reduce((prev, next)=>prev+next)
+    let amount = cartData.length && cartData.map(item=>item.Price).reduce((prev, next)=>prev+next)
     console.warn(amount)
     return (<div>
         <Link to="/" >Go to Products Link</Link>

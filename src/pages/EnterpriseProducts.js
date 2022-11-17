@@ -45,6 +45,13 @@ function EnterpriseProducts(){
     },[])
 
     return<>
+        <Row>
+            <Col md={{ span: 4, offset: 4}}>
+                <Button variant="primary" type="button" onClick={()=> dispatch(productList())}>
+                    Add a product
+                </Button>
+            </Col>
+        </Row>
         {/*<Row>
             <Col md={{ span: 4, offset: 4}}>
                 <Button variant="primary" type="button" onClick={()=> {navigate("/add-product");}}>
