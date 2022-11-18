@@ -17,6 +17,9 @@ export const removeToCart = (data) => {
 }
 
 export const emptyCart = () => {
+    localStorage.removeItem(
+        "store"
+    )
     console.warn("action emptyCart",)
     return {
         type: EMPTY_CART,

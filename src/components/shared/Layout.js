@@ -5,6 +5,7 @@ import {Navbar,Nav, NavDropdown,Container} from 'react-bootstrap';
 import { useNavigate} from 'react-router-dom'
 import {emptyCart} from "../../redux/action";
 import { saveState } from '../localStorage';
+import {useEffect} from "react";
 
 function Layout(props){
     const result = useSelector((state) => state.cartData);
@@ -16,6 +17,14 @@ function Layout(props){
         localStorage.clear();
         navigate('/')
     }
+    async function SaveCart(){
+        await localStorage.setItem("store",JSON.stringify(result))
+
+    }
+
+
+    let store = localStorage.getItem("store")
+
 
     return<>
         <Navbar bg="primary" variant="dark" expand="lg">
@@ -33,13 +42,16 @@ function Layout(props){
                             <div className='search-box'>
                                 <input type="text" onChange={(event) => dispatch(productSearch(event.target.value))} placeholder='Search Product' />
                             </div>
-                            <Nav.Link href={'/cart'} >
+                            <Nav.Link href={'/cart'} onClick={SaveCart} >
                                 <div className="cart-div">
                                     <span>{result.length}</span>
                                     <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="" />
 
                                 </div>
                             </Nav.Link>
+                            <div>
+                                <button >Save cart</button>
+                            </div>
                             <div className='search-box'>
                                 <button onClick={() => dispatch(emptyCart())}>Empty Cart</button>
                             </div>

@@ -2,6 +2,9 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
+
+
+
     const cartData = useSelector((state) => state.cartData);
     let amount = cartData.length && cartData.map(item=>item.Price).reduce((prev, next)=>prev+next)
     console.warn(amount)
