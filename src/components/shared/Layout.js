@@ -4,6 +4,7 @@ import { productSearch } from '../../redux/productAction'
 import {Navbar,Nav, NavDropdown,Container} from 'react-bootstrap';
 import { useNavigate} from 'react-router-dom'
 import {emptyCart} from "../../redux/action";
+import { saveState } from '../localStorage';
 
 function Layout(props){
     const result = useSelector((state) => state.cartData);
