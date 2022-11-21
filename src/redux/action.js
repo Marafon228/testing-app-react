@@ -16,7 +16,7 @@ export const removeToCart = (data) => {
     }
 }
 
-export const emptyCart = () => {
+export const  emptyCart = () => {
     localStorage.removeItem(
         "store"
     )
