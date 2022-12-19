@@ -30,7 +30,7 @@ const Cart = () => {
     return (<div>
         {/*<Link id={'goBack'} onClick={navigate(-1)} >Go to Products Link</Link>*/}
         <h1>Cart Page</h1>
-        <div className="cart-page-container">
+        {/*<div className="cart-page-container">
             <table>
                 <tr>
                     <td>Name</td>
@@ -56,7 +56,7 @@ const Cart = () => {
                 <div className="adjust-price"><span>Total</span><span>{amount-(amount/10)}</span></div>
 
             </div>
-        </div>
+        </div>*/}
 
         <Row xs={1} md={3} className="g-4">
             {cartData.map((sp) => (

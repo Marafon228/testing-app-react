@@ -15,7 +15,7 @@ function Login() {
     }, [])
     async function Login(){
         let item={login,password};
-        let result = await fetch("http://192.168.101.25:3310/api/Users/SignIn",{
+        let result = await fetch("http://192.168.0.101:3310/api/Users/SignIn",{
             method: 'POST',
             headers:{
                 "Content-Type":"application/json",
@@ -23,7 +23,32 @@ function Login() {
             },
             body: JSON.stringify(item)
         });
+
+
         result = await result.json();
+        //let Enterprise = [];
+        if (result['Role'] === 'Предприниматель') {
+
+            let resultIdEnterprise = await fetch(`http://192.168.0.101:3310/api/Users/GetEnterpriseFromUserId?id=${result['Id']}`,{
+                method: 'GET',
+                headers:{
+                    "Content-Type":"application/json",
+                    "Accept":'application/json'
+                },
+
+            });
+            resultIdEnterprise = await resultIdEnterprise.json();
+
+            //console.log(resultIdEnterprise)
+
+
+
+
+            result.Enterprise = resultIdEnterprise;
+        }
+        console.log(result)
+
+
         localStorage.setItem("user-info",JSON.stringify(result))
         navigate('/')
     }

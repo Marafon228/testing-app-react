@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import {useRef} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import data from "bootstrap/js/src/dom/data";
 /*import {FormLabel} from "react-bootstrap";*/
 /*import {encodeBase64} from "tweetnacl-util";*/
 /*import {type} from "@testing-library/user-event/dist/type";*/
@@ -16,13 +17,22 @@ function AddProduct(){
 
 
 
+
     const ProductName = useRef("");
     const ProductDescription = useRef("");
     const ProductPrice = useRef("");
     const ProductImage = useRef("");
+    const ProductEnterprise = useRef("");
 
 
     const navigate = useNavigate();
+
+    let user = JSON.parse(localStorage.getItem('user-info'))
+    let Enterprise = user['Enterprise'];
+    if (user['Role'] !== 'Предприниматель'){
+        navigate('/')
+    }
+    console.log(user['Enterprise'])
 
 
     /*function uploadImage () {
@@ -198,7 +208,8 @@ function AddProduct(){
             Name: ProductName.current.value,
             Description: ProductDescription.current.value,
             Price: ProductPrice.current.value,
-            Image: viewArray
+            Image: viewArray,
+            IdEnterprise: ProductEnterprise.current.value
 
 
             /*Image: ArrayBufferImg(document.getElementById('image'))*/
@@ -420,6 +431,9 @@ function AddProduct(){
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={()=> imgInForm = document.getElementById('image')}/>*/}
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={(e) => imageFile = e.target.files} />*/}
                 <Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />
+
+
+
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={(e) => {
                     imageFile = e.target.files
                     imageFile.addEventListener("change", async event => {
@@ -439,6 +453,19 @@ function AddProduct(){
                 }}/>*/}
 
             </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Enterprise</Form.Label>
+                <Form.Select aria-label="Default select example">
+                    {/*<option>Select Enterprise</option>*/}
+                    {
+                        Enterprise.map((Enter)=>(<option value={Enter.IdEnterprise} ref={ProductEnterprise}>{Enter.NameEnterprise}</option>))
+                    }
+                    {/*<option value="1" ref={ProductEnterprise}>One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>*/}
+                </Form.Select>
+            </Form.Group>
             {/*<Form.Group>
                 <Form.Label htmlFor="fileUpload" styles={{ cursor: "pointer" }}>
                     <Form.Control
@@ -450,7 +477,7 @@ function AddProduct(){
 
 
 
-
+            <br/>
             <Button variant="primary" type="button" onClick={addProductHandler}>
                 Submit
             </Button>

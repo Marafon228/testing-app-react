@@ -2,7 +2,7 @@ import { ADD_TO_CART, EMPTY_CART, REMOVE_FROM_CART } from "./constant"
 
 
 
-export const cartData = (data = [], action) => {
+export const cartData = (data = JSON.parse(localStorage.getItem('store')), action) => {
     switch (action.type) {
         case ADD_TO_CART:
             console.warn("ADD_TO_CART condition ", action)

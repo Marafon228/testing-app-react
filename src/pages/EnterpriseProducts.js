@@ -16,6 +16,8 @@ function EnterpriseProducts(){
 
     const dispatch = useDispatch();
     let data = useSelector((state)=>state.productData);
+    let user = JSON.parse(localStorage.getItem('user-info'))
+
     //let shop = useSelector((state)=>state.productData);
     console.warn("data in main component", data);
 
@@ -27,10 +29,10 @@ function EnterpriseProducts(){
     const {Id} = useParams();
 
 
-   /* useEffect(()=>
+    useEffect(()=>
     {
         //dispatch(productList())
-        axios.get(`http://192.168.101.25:3310/api/Products/GetProductFromEnterpriseId?id=${Id}`)
+        axios.get(`http://192.168.0.101:3310/api/Products/GetProductFromEnterpriseId?id=${Id}`)
             .then((response)=>{
                 setShop((existingData)=>{
                         return response.data;
@@ -38,30 +40,24 @@ function EnterpriseProducts(){
                 )
             })
 
-    },[])*/
-
-    useEffect(()=>{
-        dispatch(productList())
     },[])
 
+    /*useEffect(()=>{
+        dispatch(productList())
+    },[])*/
+
     return<>
-        <Row>
+        {/*<Row>
             <Col md={{ span: 4, offset: 4}}>
                 <Button variant="primary" type="button" onClick={()=> dispatch(productList())}>
                     Add a product
                 </Button>
             </Col>
-        </Row>
-        {/*<Row>
-            <Col md={{ span: 4, offset: 4}}>
-                <Button variant="primary" type="button" onClick={()=> {navigate("/add-product");}}>
-                    Add a product
-                </Button>
-            </Col>
         </Row>*/}
 
+
         <Row xs={1} md={3} className="g-4">
-            {data.map((sp) => (
+            {shop.map((sp) => (
                 <Col key={sp.Id}>
                     <Card>
                         {/*<Card.Img variant={"top"} src = {sp.Image((im)=> {})} />*/}

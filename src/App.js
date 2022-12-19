@@ -11,6 +11,8 @@ import Login from "./pages/Login";
 import Cart from "./components/Cart";
 import Main from "./components/Main";
 import Order from "./pages/Order";
+import Lk from "./pages/Lk";
+import UpdateOrder from "./pages/UpdateOrder";
 
 
 function App() {
@@ -22,14 +24,14 @@ function App() {
           <Routes>
               <Route path='/main' element={<Main />} />
               <Route path='/cart' element={<Cart />} />
-
-
+              <Route path='/lk' element={<Lk />} />
               <Route path="/add-product" element={<AddProduct></AddProduct>}></Route>
               <Route path="/order" element={<Order></Order>}></Route>
               <Route path="/register" element={<Register></Register>}></Route>
               <Route path="/login" element={<Login></Login>}></Route>
               <Route path="/view-product/:Id" element={<EnterpriseProducts></EnterpriseProducts>}></Route>
               <Route path="/update-product/:Id" element={<UpdateProduct></UpdateProduct>}></Route>
+              <Route path="/update-order/:Id" element={<UpdateOrder></UpdateOrder>}></Route>
           </Routes>
       </Layout>
 
