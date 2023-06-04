@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {IP} from "../const/global"
 //import Header from './Header'
 
 function Login() {
@@ -15,7 +16,7 @@ function Login() {
     }, [])
     async function Login(){
         let item={login,password};
-        let result = await fetch("http://192.168.0.101:3310/api/Users/SignIn",{
+        let result = await fetch(IP + "/api/Users/SignIn",{
             method: 'POST',
             headers:{
                 "Content-Type":"application/json",
@@ -29,7 +30,7 @@ function Login() {
         //let Enterprise = [];
         if (result['Role'] === 'Предприниматель') {
 
-            let resultIdEnterprise = await fetch(`http://192.168.0.101:3310/api/Users/GetEnterpriseFromUserId?id=${result['Id']}`,{
+            let resultIdEnterprise = await fetch(IP + `/api/Users/GetEnterpriseFromUserId?id=${result['Id']}`,{
                 method: 'GET',
                 headers:{
                     "Content-Type":"application/json",

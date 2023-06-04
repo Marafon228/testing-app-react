@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import {useRef} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {IP} from "../const/global"
 import data from "bootstrap/js/src/dom/data";
 /*import {FormLabel} from "react-bootstrap";*/
 /*import {encodeBase64} from "tweetnacl-util";*/
@@ -195,23 +196,12 @@ function AddProduct(){
 
         /*var img = document.getElementById('image');*/
         /*img.addEventListener("change",  )*/
-
-
-
-
-
         var payload = {
-
-
-
-
             Name: ProductName.current.value,
             Description: ProductDescription.current.value,
             Price: ProductPrice.current.value,
             Image: viewArray,
             IdEnterprise: ProductEnterprise.current.value
-
-
             /*Image: ArrayBufferImg(document.getElementById('image'))*/
 
                 /*async ()=> {
@@ -255,7 +245,7 @@ function AddProduct(){
         /*console.log(immge)*/
         console.log(typeof payload.Image);
         console.log(payload.Image);
-        axios.post("http://192.168.0.101:3310/api/Products/AddProductWeb",payload)//POST запрос
+        axios.post(IP + "/api/Products/AddProductWeb",payload)//POST запрос
             .then((response)=>{
                 navigate("/");
             });

@@ -6,6 +6,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {productList} from "../redux/productAction";
 import {useDispatch, useSelector} from "react-redux";
 import {addToCart, removeToCart} from "../redux/action";
+import {IP} from "../const/global"
 
 
 
@@ -32,7 +33,7 @@ function EnterpriseProducts(){
     useEffect(()=>
     {
         //dispatch(productList())
-        axios.get(`http://192.168.0.101:3310/api/Products/GetProductFromEnterpriseId?id=${Id}`)
+        axios.get(IP + `/api/Products/GetProductFromEnterpriseId?id=${Id}`)
             .then((response)=>{
                 setShop((existingData)=>{
                         return response.data;

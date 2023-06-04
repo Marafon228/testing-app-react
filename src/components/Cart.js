@@ -11,8 +11,11 @@ const Cart = () => {
     const navigate = useNavigate()
 
     const cartData = useSelector((state) => state.cartData);
-    let amount = cartData.length && cartData.map(item=>item.Price).reduce((prev, next)=>prev+next)
-    console.warn(amount)
+    if (cartData){
+        let amount = cartData.length && cartData.map(item=>item.Price).reduce((prev, next)=>prev+next)
+        console.warn(amount)
+    }
+
 
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
@@ -27,7 +30,15 @@ const Cart = () => {
 
     const filter = (Id, arr) => arr.filter(s => s.Id === Id);
 
-    return (<div>
+    return (
+
+        (cartData == null) ?
+            <div>
+                <h1>Cart page</h1>
+                <p>Cart is null</p>
+            </div>
+            :
+        <div>
         {/*<Link id={'goBack'} onClick={navigate(-1)} >Go to Products Link</Link>*/}
         <h1>Cart Page</h1>
         {/*<div className="cart-page-container">
@@ -80,10 +91,10 @@ const Cart = () => {
                                 <b>Количество:</b>{sp.Id}
                             </Card.Text>
                             <Button variant="primary" type="button" onClick={()=> dispatch(addToCart(sp))}>
-                                Add to cart
+                                +
                             </Button>
                             <Button variant="primary" type="button" onClick={()=> dispatch(removeToCart(sp.Id))}>
-                                Remove to cart
+                                -
                             </Button>
                             {/*<Button variant="primary" type="button" onClick={()=> {navigate(`/update-product/${sp.Id}`);}}>
                                 Edit

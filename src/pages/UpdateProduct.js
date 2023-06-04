@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import {useEffect, useRef} from "react";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
+import {IP} from "../const/global";
 
 function UpdateProduct () {
 
@@ -23,7 +24,7 @@ function UpdateProduct () {
 
     useEffect(()=>
     {
-        axios.get(`http://192.168.0.101:3310/api/Products/GetProductFromId?id=${Id}`)
+        axios.get(IP + `/api/Products/GetProductFromId?id=${Id}`)
             .then((response)=> {
                 ProductName.current.value = response.data.Name;
                 ProductDescription.current.value = response.data.Description;

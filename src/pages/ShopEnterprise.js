@@ -4,6 +4,7 @@ import {Card, Col, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {useNavigate} from "react-router-dom";
 import Carousel from 'react-bootstrap/Carousel';
+import {IP} from "../const/global"
 
 
 function ShopEnterprise(props) {
@@ -16,7 +17,7 @@ function ShopEnterprise(props) {
 
     useEffect(()=>
     {
-        axios.get("http://192.168.0.101:3310/api/Enterprises/GetEnterpris")
+        axios.get(IP + "/api/Enterprises/GetEnterpris")
             .then((response)=>{
                 setShop((existingData)=>{
                         return response.data;

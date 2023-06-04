@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import {useNavigate } from 'react-router-dom'
 import {emptyCart} from "../redux/action";
 import {useDispatch} from "react-redux";
+import {IP} from "../const/global"
 
 
 function Order(props) {
@@ -18,7 +19,7 @@ function Order(props) {
         let item={description,loginUser,manuProducts}
         //console.warn(item)
 
-        await fetch("http://192.168.0.101:3310/api/Orders/AddsProduct",{
+        await fetch(IP + "/api/Orders/AddsProduct",{
             method:'POST',
             body:JSON.stringify(item),
             headers:{

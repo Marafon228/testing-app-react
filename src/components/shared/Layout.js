@@ -14,7 +14,15 @@ import {useEffect} from "react";
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-
+const footerStyle = {
+    position: 'fixed',
+    left: 0,
+    bottom: 0,
+    width: '100%',
+    backgroundColor: '#f8f9fa',
+    textAlign: 'center',
+    padding: '10px 0',
+};
 
 
 
@@ -95,7 +103,7 @@ function Layout(props){
                             </div>*/}
                             <Link to="/cart"  >
                                 <div className="cart-div">
-                                    <span>{store.length}</span>
+                                    {/*<span>{store.length}</span>*/}
                                     <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="" />
 
                                 </div>
@@ -141,7 +149,7 @@ function Layout(props){
             {props.children}
         </Container>
 
-
+        <div style={footerStyle}>
         <Nav className="justify-content-center" activeKey="/home">
             <Nav.Item>
                 <Nav.Link href="/home">Active</Nav.Link>
@@ -175,6 +183,7 @@ function Layout(props){
                 </Nav.Link>
             </Nav.Item>
         </Nav>
+        </div>
     </>
 }
 

@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import {useEffect, useRef} from "react";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
+import {IP} from "../const/global"
 
 function UpdateOrder () {
 
@@ -26,7 +27,7 @@ function UpdateOrder () {
 
     useEffect(()=>
     {
-        axios.get(`http://192.168.0.101:3310/api/Orders/GetOrderFromId?id=${Id}`)
+        axios.get(IP + `/api/Orders/GetOrderFromId?id=${Id}`)
             .then((response)=> {
                 OrderName.current.value = response.data.Name;
                 OrderDescription.current.value = response.data.Description;
@@ -65,7 +66,7 @@ function UpdateOrder () {
 
 
         };
-        axios.put(`http://192.168.0.101:3310/api/Orders/EditOrder?id=${Id}`, payload)
+        axios.put(IP + `/api/Orders/EditOrder?id=${Id}`, payload)
             .then((response)=>{
                 navigate("/lk");
             });

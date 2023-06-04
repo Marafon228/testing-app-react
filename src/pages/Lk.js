@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-
+import {IP} from "../const/global"
 
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -41,7 +41,7 @@ function Lk(props) {
 
     useEffect(()=>
     {
-        axios.get(`http://192.168.0.101:3310/api/Orders/GetOrdersFromUserId?id=${user.Id}`)
+        axios.get(IP + `/api/Orders/GetOrdersFromUserId?id=${user.Id}`)
             .then((response)=>{
                 setOrder((existingData)=>{
                         return response.data;
@@ -55,7 +55,7 @@ function Lk(props) {
 
     useEffect(()=>
     {
-        axios.get(`http://192.168.0.101:3310/api/Orders/GetOrdersFromUserIdForEmployee`)
+        axios.get(IP + `/api/Orders/GetOrdersFromUserIdForEmployee`)
             .then((response)=>{
                 setOrdersEmployee((existingData)=>{
                         return response.data;

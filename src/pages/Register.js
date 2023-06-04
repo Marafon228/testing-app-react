@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import {useNavigate } from 'react-router-dom'
+import {IP} from "../const/global"
 
 function Register() {
     const [firsName,setFirsName]= useState("")
@@ -19,7 +20,7 @@ function Register() {
         let item={firsName,midleName,lastName,adress,phone,email,password,login}
         //console.warn(item)
 
-        let result = await fetch("http://192.168.0.101:3310/api/Users/RegisterUser",{
+        let result = await fetch(IP + "/api/Users/RegisterUser",{
             method:'POST',
             body:JSON.stringify(item),
             headers:{
