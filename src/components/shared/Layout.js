@@ -6,7 +6,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import {emptyCart} from "../../redux/action";
 import { saveState } from '../localStorage';
 import {useEffect} from "react";
-
+import logo from '../logo/logo.png'; // Путь к изображению логотипа
 
 
 
@@ -19,10 +19,15 @@ const footerStyle = {
     left: 0,
     bottom: 0,
     width: '100%',
+    height: '5%',
     backgroundColor: '#f8f9fa',
     textAlign: 'center',
     padding: '10px 0',
 };
+const transparent =  {
+    background: 'none',
+    border: 'none',
+}
 
 
 
@@ -77,6 +82,9 @@ function Layout(props){
 
 
     let store = JSON.parse(localStorage.getItem('store'))
+    if (store == null){
+        store = []
+    }
 
 
     return<>
@@ -84,7 +92,13 @@ function Layout(props){
             <Container>
                 <Navbar.Brand>
                     <Nav.Link href={'/'}>
-                        Shop
+                        <img
+                            src={logo} // Путь к изображению логотипа
+                            width="120"
+                            height="90"
+                            className="d-inline-block align-top"
+                            alt="Logo"
+                        />{' '}
                     </Nav.Link>
 
 
@@ -103,7 +117,7 @@ function Layout(props){
                             </div>*/}
                             <Link to="/cart"  >
                                 <div className="cart-div">
-                                    {/*<span>{store.length}</span>*/}
+                                    <span>{store.length}</span>
                                     <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="" />
 
                                 </div>
@@ -112,19 +126,19 @@ function Layout(props){
                                 <button >Save cart</button>
                             </div>*/}
                             <div className='search-box'>
-                                <button onClick={() => dispatch(emptyCart())}>Empty Cart</button>
+                                <button style={transparent} onClick={() => dispatch(emptyCart())}>Очистить корзину</button>
                             </div>
 
                         </>
                         :
                         <>
-                            <Nav.Link href={'/login'}>Login</Nav.Link>
-                            <Nav.Link href={'/register'}>Register</Nav.Link>
+                            <Nav.Link href={'/login'}>Логин</Nav.Link>
+                            <Nav.Link href={'/register'}>Регистрация</Nav.Link>
                         </>
                 }
             </Nav>
             {localStorage.getItem('user-info') ?
-            <Nav>
+            <Nav style={{marginRight:70}}>
                 <NavDropdown title={user && user.Login}>
                     <NavDropdown.Item href={'/lk'}>
                         Личный кабинет
@@ -139,7 +153,7 @@ function Layout(props){
 
 
                     <NavDropdown.Item onClick={logout}>
-                        Logout
+                        Выйти
                     </NavDropdown.Item>
                 </NavDropdown>
             </Nav>
@@ -152,6 +166,18 @@ function Layout(props){
         <div style={footerStyle}>
         <Nav className="justify-content-center" activeKey="/home">
             <Nav.Item>
+                <Nav.Link href="/">Главная</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link eventKey="link-1">О нас</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link eventKey="link-2">Контакты</Nav.Link>
+            </Nav.Item>
+        </Nav>
+
+        {/*<Nav className="justify-content-end" activeKey="/home">
+            <Nav.Item>
                 <Nav.Link href="/home">Active</Nav.Link>
             </Nav.Item>
             <Nav.Item>
@@ -165,24 +191,7 @@ function Layout(props){
                     Disabled
                 </Nav.Link>
             </Nav.Item>
-        </Nav>
-        <p className="text-center mt-4 mb-4">Or right-aligned</p>
-        <Nav className="justify-content-end" activeKey="/home">
-            <Nav.Item>
-                <Nav.Link href="/home">Active</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link eventKey="link-1">Link</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link eventKey="link-2">Link</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link eventKey="disabled" disabled>
-                    Disabled
-                </Nav.Link>
-            </Nav.Item>
-        </Nav>
+        </Nav>*/}
         </div>
     </>
 }

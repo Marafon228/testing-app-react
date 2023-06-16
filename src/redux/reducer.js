@@ -10,8 +10,16 @@ export const cartData = (data = JSON.parse(localStorage.getItem('store')), actio
         case REMOVE_FROM_CART:
             console.warn("REMOVE_FROM_CART condition ", action);
             // data.length= data.length? data.length-1:[]
-            const remainingItems= data.filter((item)=>item.Id!==action.data)
-            return [...remainingItems]
+            //const remainingItems= data.filter((item)=>item.Id!==action.data)
+            //return [...remainingItems]
+
+            const productIndex = data.findIndex((item) => item.Id === action.data);
+            if (productIndex !== -1) {
+                const newData = [...data];
+                newData.splice(productIndex, 1);
+                return newData;
+            }
+            return data;
         case EMPTY_CART:
             console.warn("EMPTY CART condition ", action);
             data =[]

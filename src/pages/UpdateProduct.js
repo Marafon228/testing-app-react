@@ -110,39 +110,39 @@ function UpdateProduct () {
 
     return<>
 
-        <legend>Update product</legend>
+        <legend>Обновление продукта</legend>
         <Form>
 
             <Form.Group className="mb-3" controlId="formProductName">
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Название</Form.Label>
                 <Form.Control type="text" ref={ProductName}/>
 
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formProductDescription">
-                <Form.Label>Description</Form.Label>
+                <Form.Label>Описание</Form.Label>
                 <Form.Control type="text"  ref={ProductDescription}/>
 
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formProductPrice">
-                <Form.Label>Price</Form.Label>
+                <Form.Label>Цена</Form.Label>
                 <Form.Control type="integer"  ref={ProductPrice}/>
 
             </Form.Group>
             <Form.Group className="mb-3" controlId="formProductImage">
-                <Form.Label>Image</Form.Label>
+                <Form.Label>Фото</Form.Label>
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />*/}
                 <Form.Control id="image" type="file" ref={ProductImage} onInput={inputImage} />
             </Form.Group>
             <Form.Group>
                 <Button variant="primary" type="button" onClick={viewImg} >
-                    View image preview
+                    Посмотреть превью фото
                 </Button>
             </Form.Group>
             <Form.Group>
 
-                <Form.Label >Image Preview</Form.Label>
+                <Form.Label >Превью фото</Form.Label>
             </Form.Group>
 
             <Form.Group>
@@ -150,7 +150,7 @@ function UpdateProduct () {
             </Form.Group>
             <Form.Group>
                 <Button variant="primary" type="button" onClick={updateProductHandler}>
-                    Submit
+                    Сохранить
                 </Button>
 
             </Form.Group>

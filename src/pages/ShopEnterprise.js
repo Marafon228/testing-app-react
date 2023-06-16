@@ -45,8 +45,8 @@ function ShopEnterprise(props) {
                     alt="First slide"
                 />
                 <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <h3>Первый слайдерl</h3>
+                    <p>Рыба текст, рыба текст, рыба текст, рыба текст, рыба текст.</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -57,8 +57,8 @@ function ShopEnterprise(props) {
                 />
 
                 <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h3>Второй слайдер</h3>
+                    <p>Рыба текст, рыба текст, рыба текст, рыба текст, рыба текст.</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -69,9 +69,9 @@ function ShopEnterprise(props) {
                 />
 
                 <Carousel.Caption>
-                    <h3>Third slide label</h3>
+                    <h3>Третий слайдер</h3>
                     <p>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                        Рыба текст, рыба текст, рыба текст, рыба текст, рыба текст.
                     </p>
                 </Carousel.Caption>
             </Carousel.Item>
@@ -97,7 +97,7 @@ function ShopEnterprise(props) {
                                 Edit
                             </Button>*/}
                             <Button variant="primary" type="button" onClick={()=> {navigate(`/view-product/${sp.Id}`);}}>
-                                View product
+                                Посмотреть продукты
                             </Button>
 
                         </Card.Body>

@@ -69,14 +69,14 @@ function EnterpriseProducts(){
                             <Card.Title>{sp.Id}</Card.Title>
                             <Card.Title>{sp.Name}</Card.Title>
                             <Card.Text>
-                                <b>Price:</b>{sp.Price}
+                                <b>Цена:</b>{sp.Price}
                             </Card.Text>
                             <Button variant="primary" type="button" onClick={()=> dispatch(addToCart(sp))}>
-                                Add to cart
+                                Добавить в корзину
                             </Button>
-                            <Button variant="primary" type="button" onClick={()=> dispatch(removeToCart(sp.Id))}>
+                            {/*<Button variant="primary" type="button" onClick={()=> dispatch(removeToCart(sp.Id))}>
                                 Remove to cart
-                            </Button>
+                            </Button>*/}
                             {/*<Button variant="primary" type="button" onClick={()=> {navigate(`/update-product/${sp.Id}`);}}>
                                 Edit
                             </Button>*/}

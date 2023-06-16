@@ -274,7 +274,7 @@ function Lk(props) {
                     <Row>
                         <Col md={{ span: 4, offset: 4}}>
                             <Button variant="primary" type="button" onClick={()=> {navigate("/add-product");}}>
-                                Add a product
+                                Добавить продукт
                             </Button>
                         </Col>
                     </Row>

@@ -392,29 +392,29 @@ function AddProduct(){
     return (
         <>
 
-        <legend>Add a new product</legend>
+        <legend>Добавить новый продукт</legend>
         <Form>
 
             <Form.Group className="mb-3" controlId="formProductName">
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Наименование</Form.Label>
                 <Form.Control type="text" ref={ProductName}/>
 
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formProductDescription">
-                <Form.Label>Description</Form.Label>
+                <Form.Label>Описание</Form.Label>
                 <Form.Control type="text"  ref={ProductDescription}/>
 
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formProductPrice">
-                <Form.Label>Price</Form.Label>
+                <Form.Label>Цена</Form.Label>
                 <Form.Control type="integer"  ref={ProductPrice}/>
 
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formProductImage">
-                <Form.Label>Image</Form.Label>
+                <Form.Label>Фото</Form.Label>
                 {/*<Form.Control type="file" ref={ProductImage} onChange={(e)=> { console.log(e.target.files)}}/>*/}
                 {/*<Form.Control value={imgArray} type="file" ref={ProductImage} onChange={(e)=> setImgArray(e.target.value)}/>*/}
                 {/*<Form.Control id="image" type="file" ref={ProductImage} onChange={()=> imgInForm = document.getElementById('image')}/>*/}
@@ -445,7 +445,7 @@ function AddProduct(){
             </Form.Group>
 
             <Form.Group>
-                <Form.Label>Enterprise</Form.Label>
+                <Form.Label>Предприятие</Form.Label>
                 <Form.Select aria-label="Default select example">
                     {/*<option>Select Enterprise</option>*/}
                     {
@@ -469,7 +469,7 @@ function AddProduct(){
 
             <br/>
             <Button variant="primary" type="button" onClick={addProductHandler}>
-                Submit
+                Сохранить
             </Button>
 
         </Form>

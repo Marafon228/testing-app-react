@@ -56,15 +56,15 @@ function Login() {
     return (
         <div>
             {/*<Header/>*/}
-            <h1>Login Page</h1>
+            <h1>Авторизация</h1>
             <div className="col-sm-6 offset-sm-3">
-                <input type="text" placeholder="login"
+                <input type="text" placeholder="Логин"
                        onChange={(e)=> setLogin(e.target.value)} className="form-control"/>
                 <br/>
-                <input type="password" placeholder="password"
+                <input type="password" placeholder="Пароль"
                        onChange={(e)=> setPassword(e.target.value)} className="form-control"/>
                 <br/>
-                <button className="btn btn-primary" onClick={Login}>Login</button>
+                <button className="btn btn-primary" onClick={Login}>Войти</button>
             </div>
         </div>
     )

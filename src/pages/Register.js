@@ -40,25 +40,25 @@ function Register() {
 
     return (
         <div className="col-sm-6 offset-sm-3">
-            <h1>Register Page</h1>
-            <input type="text" className="form-control" value={firsName} onChange={(e)=> setFirsName(e.target.value)} placeholder="firsName" />
+            <h1>Регистрация</h1>
+            <input type="text" className="form-control" value={firsName} onChange={(e)=> setFirsName(e.target.value)} placeholder="Имя" />
             <br />
-            <input type="text" className="form-control" value={midleName} onChange={(e)=> setMidleName(e.target.value)} placeholder="midleName" />
+            <input type="text" className="form-control" value={midleName} onChange={(e)=> setMidleName(e.target.value)} placeholder="Фамилия" />
             <br />
-            <input type="text" className="form-control" value={lastName} onChange={(e)=> setLastName(e.target.value)} placeholder="lastName" />
+            <input type="text" className="form-control" value={lastName} onChange={(e)=> setLastName(e.target.value)} placeholder="Отчество" />
             <br />
-            <input type="text" className="form-control" value={login} onChange={(e)=> setLogin(e.target.value)} placeholder="login" />
+            <input type="text" className="form-control" value={login} onChange={(e)=> setLogin(e.target.value)} placeholder="Логин" />
             <br />
-            <input type="password" className="form-control" value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="password"/>
+            <input type="password" className="form-control" value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="Пароль"/>
             <br />
-            <input type="text" className="form-control" value={adress} onChange={(e)=> setAdress(e.target.value)} placeholder="adress" />
+            <input type="text" className="form-control" value={adress} onChange={(e)=> setAdress(e.target.value)} placeholder="Адрес" />
             <br />
-            <input type="text" className="form-control" value={phone} onChange={(e)=> setPhone(e.target.value)} placeholder="phone" />
+            <input type="text" className="form-control" value={phone} onChange={(e)=> setPhone(e.target.value)} placeholder="Телефон" />
             <br />
-            <input type="text" className="form-control" value={email} onChange={(e)=> setEmail(e.target.value)} placeholder="email" />
+            <input type="text" className="form-control" value={email} onChange={(e)=> setEmail(e.target.value)} placeholder="Email" />
             <br />
 
-            <button className="btn btn-primary" onClick={signUp}>Sign Up</button>
+            <button className="btn btn-primary" onClick={signUp}>Зарегистрироваться</button>
         </div>
     );
 }
